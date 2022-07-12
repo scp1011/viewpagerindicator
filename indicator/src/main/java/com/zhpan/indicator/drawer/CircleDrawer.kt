@@ -68,7 +68,12 @@ class CircleDrawer internal constructor(indicatorOptions: IndicatorOptions) : Ba
     )
     mPaint.color = evaluate as Int
     val nextCoordinateX = if (currentPosition == mIndicatorOptions.pageSize - 1) {
-      IndicatorUtils.getCoordinateX(mIndicatorOptions, maxWidth, 0)
+      //单页的情况下指示器显示checkedColor
+      if (mIndicatorOptions.showIndicatorOneItem && mIndicatorOptions.pageSize == 1){
+        coordinateX + mIndicatorOptions.sliderGap + mIndicatorOptions.normalSliderWidth
+      }else{
+        IndicatorUtils.getCoordinateX(mIndicatorOptions, maxWidth, 0)
+      }
     } else {
       coordinateX + mIndicatorOptions.sliderGap + mIndicatorOptions.normalSliderWidth
     }
